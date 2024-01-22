@@ -13,10 +13,8 @@ public class Main {
 
         StringTokenizer st = new StringTokenizer(str);
 
-        int height = Integer.parseInt(st.nextToken());
-        int width = Integer.parseInt(st.nextToken());
 
-        System.out.println(height + width);
+
     }
 
 }
