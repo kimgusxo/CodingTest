@@ -7,9 +7,12 @@ public class Main {
     public static void main(String[] args) {
 
         int[][] edges = {{4, 11}, {1, 12}, {8, 3}, {12, 7}, {4, 2}, {7, 11}, {4, 8}, {9, 6}, {10, 11}, {6, 10}, {3, 5}, {11, 1}, {5, 3}, {11, 9}, {3, 8}};
+        int[] result = solution(edges);
 
-        solution(edges);
-
+        System.out.println(result[0]);
+        System.out.println(result[1]);
+        System.out.println(result[2]);
+        System.out.println(result[3]);
     }
 
     public static int[] solution(int[][] edges) {
@@ -43,7 +46,9 @@ public class Main {
         }
 
         // 1-3. 오는 엣지가 0인 노드에서 가는 엣지가 2 이상인 노드가 생성한 노드
+        // 1-4. 전체 그래프 개수 찾기
         int createdNode = 0;
+        int graphCount = 0;
         for(Integer i : zeroNodes) {
             int cnt = 0;
             for(int[] edge : edges) {
@@ -53,11 +58,12 @@ public class Main {
             }
             if(cnt>=2) {
                 createdNode = i;
+                graphCount = cnt;
                 break;
             }
         }
 
-        // 1-4. 탐색을 위한 그래프 생성
+        // 1-5. 탐색을 위한 그래프 생성
         ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
 
         for(int i=0; i<=max; i++) {
@@ -71,17 +77,15 @@ public class Main {
         }
 
         // 2. 그래프 모양 찾기
-        // 2-0. 전체 그래프 개수 찾기
-        int graphCount = 0;
-
         // 2-1. 막대 그래프 찾기(리스트 size가 0인것)
         int barGraph = 0;
         for(int i=1; i<graph.size(); i++) {
+            if(!flag[i]) continue;
+
             if(graph.get(i).size() == 0) {
                 barGraph++;
             }
         }
-        barGraph -= 1;
 
         // 2-2. 8자 그래프 찾기(리스트 size가 2인것)
         int eightGraph = 0;
