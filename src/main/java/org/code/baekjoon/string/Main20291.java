@@ -34,6 +34,7 @@ public class Main20291 {
             }
             System.out.println(s + " " + cnt);
 
+
         }
     }
 }
